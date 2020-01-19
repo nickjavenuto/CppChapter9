@@ -1,0 +1,74 @@
+//nick venuto ©
+//1.18.2010
+//Chapter 9 Array Expander
+
+//Write a function that acceps an int array and the arrays size as arguments.  The funtion should create a new array    twice the size of the argument array.  The function should copy the contents of the argument array to the new array and initialize the unused elements of the second array with 0. The function should return a pointer to the new array.
+
+# include <iostream>
+using namespace std; \
+
+//function prototypes
+int* duplicateArray(const int*, int); 
+void displayArray(const int[], int);
+
+int main()
+{
+	//Define Constants for the array sizes
+	const int SIZE1= 5, SIZE2 = 7, SIZE3 = 10;
+
+	// Define 3 arrays of different sizes
+	int array1[SIZE1] = { 100,200,300,400,50 };
+	int array2[SIZE2] = { 10, 20, 30, 40, 50, 60, 70 };
+	int array3[SIZE3] = { 1,2,3,4,5,6,7,8,9,10 };
+
+	//Define 3 pointers for the duplicate pointers
+	int* dup1 = nullptr, * dup2 = nullptr, * dup3 = nullptr; 
+
+	//Duplicate the arrays
+	dup1 = duplicateArray(array1, SIZE1);
+	dup2 = duplicateArray(array2, SIZE2);
+	dup3 = duplicateArray(array3, SIZE3);
+
+	//Display to original arrays
+	cout << "Here are the original array containers: \n"; 
+	displayArray(array1, SIZE1);
+	displayArray(array2, SIZE2);
+	displayArray(array3, SIZE3);
+
+	//Display the new arrays
+	cout << "Here are the new array containers: \n"; 
+	displayArray(dup1, SIZE1);
+	displayArray(dup2, SIZE2);
+	displayArray(dup3, SIZE3);
+
+	//Free the allocated memory and set pointers to 0
+	delete[] dup1; 
+	delete[] dup2; 
+	delete[] dup3; 
+	dup1 = nullptr; 
+	dup2 = nullptr;
+	dup3 = nullptr;
+	return 0; 
+}
+
+int* duplicateArray(const int* arr, int size)
+{
+	int* newArray = nullptr; 
+	//Validate the size.  If 0 or a negative number was passed, return a null pointer.
+	if (size <= 0)
+		return nullptr; 
+	//Allocate new memory
+	newArray = new int[size]; 
+	//Copy the array's contents to the new array
+	for (int index = 0; index < size; index++)
+		newArray[index] = arr[index]; 
+	//return a pointer to a new array
+	return newArray; 
+}
+
+void displayArray(const int arr[], int size)
+{
+	for (int index = 0; index < size; index++)
+		cout << arr[index] << " "; 
+	cout << endl; 
+}
